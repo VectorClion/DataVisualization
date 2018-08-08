@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="echarts.min.js"></script>	
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'), 'light');
+        var option = {
+		    title: {
+			    text:'异步加载示例'
+			},
+			tooltip: {},
+            legend: {
+			    data: ['销量']
+			},
+			xAxis: {
+			    data: []
+			},
+			yAxis: {},
+			series: [{
+			    name: '销量',
+				type: 'bar',
+				data: []
+			}]
+		};
+        myChart.showLoading();
+        $.get('data.json').done(function (data) {
+			myChart.hideLoading();
+			myChart.setOption({
+			    xAxis: {
+				    data: data.categories
+				},
+				series: [{
+				    name: '销量',
+					data: data.data
+				}]
+			});
+		});
+    </script>
+</body>
+</html>

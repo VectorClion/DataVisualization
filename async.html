@@ -29,7 +29,7 @@
 			}]
 		};
         myChart.showLoading();
-        $.get('https://github.com/VectorClion/DataVisualization/blob/master/data.json').done(function (data) {
+$.get('data.json').done(function (data) {
 			myChart.hideLoading();
 			myChart.setOption({
 			    xAxis: {
